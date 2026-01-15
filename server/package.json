@@ -7,7 +7,11 @@
     "dev": "nodemon --exec ts-node src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "db:init": "psql -U postgres -d stock_app -f src/db/init.sql"
+    "migrate": "bash scripts/migrate.sh",
+    "db:init": "psql -U postgres -d stock_app -f src/db/init.sql",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f postgres"
   },
   "keywords": [],
   "author": "",
