@@ -38,6 +38,6 @@ jobs:
             npm run migrate
 
             echo "♻️  Restarting application..."
-            pm2 restart stock-share-api || pm2 start npm --name "stock-share-api" -- start
+            pm2 restart stock-share-api
 
             echo "✅ Deployment completed successfully!"
