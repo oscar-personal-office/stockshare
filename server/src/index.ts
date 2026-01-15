@@ -23,8 +23,34 @@ app.use('/api/stocks', stocksRouter);
 app.use('/api/markings', markingsRouter);
 
 // Health check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+app.get('/api/health', async (_req, res) => {
+  try {
+    // Check database connection
+    const result = await pool.query('SELECT NOW() as time');
+    const dbTime = result.rows[0].time;
+
+    res.json({
+      status: 'ok',
+      timestamp: new Date().toISOString(),
+      database: {
+        status: 'connected',
+        serverTime: dbTime
+      },
+      uptime: process.uptime(),
+      environment: process.env.NODE_ENV || 'development'
+    });
+  } catch (error) {
+    res.status(503).json({
+      status: 'error',
+      timestamp: new Date().toISOString(),
+      database: {
+        status: 'disconnected',
+        error: error instanceof Error ? error.message : 'Unknown error'
+      },
+      uptime: process.uptime(),
+      environment: process.env.NODE_ENV || 'development'
+    });
+  }
 });
 
 // Initialize database and start server

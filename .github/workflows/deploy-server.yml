@@ -1,0 +1,43 @@
+name: Deploy Server to VPS
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Deployment reason'
+        required: false
+        default: 'Manual deployment'
+
+jobs:
+  deploy:
+    name: Deploy to VPS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print deployment info
+        run: |
+          echo "🚀 Deploying server to VPS"
+          echo "📝 Reason: ${{ github.event.inputs.reason }}"
+          echo "👤 Triggered by: ${{ github.actor }}"
+
+      - name: Deploy to server via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 107.175.228.64
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /root/stockshare/server
+            echo "📥 Pulling latest code..."
+            git pull origin main
+
+            echo "📦 Installing dependencies..."
+            npm install --production
+
+            echo "🔄 Running database migration..."
+            npm run migrate
+
+            echo "♻️  Restarting application..."
+            pm2 restart stock-share-api || pm2 start npm --name "stock-share-api" -- start
+
+            echo "✅ Deployment completed successfully!"
