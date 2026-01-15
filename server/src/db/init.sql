@@ -4,7 +4,7 @@
 -- 板块表
 CREATE TABLE IF NOT EXISTS boards (
   id SERIAL PRIMARY KEY,
-  title VARCHAR(100) NOT NULL,
+  title VARCHAR(100) NOT NULL UNIQUE,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -42,20 +42,25 @@ CREATE TABLE IF NOT EXISTS stock_markings (
   UNIQUE(user_id, board_id, symbol)
 );
 
--- 插入默认板块数据
+-- 插入默认板块数据（幂等）
 INSERT INTO boards (title) VALUES
   ('🛡️ 老万的短线看板'),
   ('🔋 老黄的赛道成长'),
   ('🚀 老曾的重仓观察')
-ON CONFLICT DO NOTHING;
+ON CONFLICT (title) DO NOTHING;
 
--- 插入默认股票数据
-INSERT INTO board_stocks (board_id, symbol, name) VALUES
-  (1, '600519.SH', '贵州茅台'),
-  (1, '601318.SH', '中国平安'),
-  (1, '600036.SH', '招商银行'),
-  (2, '300750.SZ', '宁德时代'),
-  (2, '002594.SZ', '比亚迪'),
-  (3, '300059.SZ', '东方财富'),
-  (3, '601138.SH', '工业富联')
-ON CONFLICT DO NOTHING;
+-- 插入默认股票数据（幂等）
+-- 使用子查询获取 board_id，避免硬编码
+INSERT INTO board_stocks (board_id, symbol, name)
+SELECT b.id, v.symbol, v.name
+FROM (VALUES
+  ('🛡️ 老万的短线看板', '600519.SH', '贵州茅台'),
+  ('🛡️ 老万的短线看板', '601318.SH', '中国平安'),
+  ('🛡️ 老万的短线看板', '600036.SH', '招商银行'),
+  ('🔋 老黄的赛道成长', '300750.SZ', '宁德时代'),
+  ('🔋 老黄的赛道成长', '002594.SZ', '比亚迪'),
+  ('🚀 老曾的重仓观察', '300059.SZ', '东方财富'),
+  ('🚀 老曾的重仓观察', '601138.SH', '工业富联')
+) AS v(board_title, symbol, name)
+JOIN boards b ON b.title = v.board_title
+ON CONFLICT (board_id, symbol) DO NOTHING;
