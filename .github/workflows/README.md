@@ -75,7 +75,7 @@ CLOUDFLARE_ACCOUNT_ID
 
 ## 手动触发部署步骤
 
-1. 访问 GitHub 仓库：`https://github.com/oscartsui/stockshare`
+1. 访问 GitHub 仓库：`https://github.com/oscar-personal-office/stockshare`
 2. 点击顶部的 **Actions** 标签
 3. 在左侧选择要运行的工作流：
    - **Deploy Server to VPS** - 服务端部署
@@ -86,8 +86,8 @@ CLOUDFLARE_ACCOUNT_ID
 7. 等待部署完成，查看日志
 
 ### 快速链接
-- 服务端部署：`https://github.com/oscartsui/stockshare/actions/workflows/deploy-server.yml`
-- 客户端部署：`https://github.com/oscartsui/stockshare/actions/workflows/deploy-client.yml`
+- 服务端部署：`https://github.com/oscar-personal-office/stockshare/actions/workflows/deploy-server.yml`
+- 客户端部署：`https://github.com/oscar-personal-office/stockshare/actions/workflows/deploy-client.yml`
 
 ## 注意事项
 
@@ -106,7 +106,7 @@ CLOUDFLARE_ACCOUNT_ID
 手动触发部署后，在 Actions 页面可以实时查看部署进度和日志：
 
 ```
-https://github.com/oscartsui/stockshare/actions
+https://github.com/oscar-personal-office/stockshare/actions
 ```
 
 ### 日志说明
