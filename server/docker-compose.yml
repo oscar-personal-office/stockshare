@@ -6,7 +6,7 @@ services:
     image: postgres:15.13-alpine
     container_name: stock_app
     shm_size: 1gb
-    command: postgres -c 'max_connections=1000' -c 'wal_level=logical' -c 'wal_log_hints=on'
+    command: postgres -c 'max_connections=1000' -c 'wal_level=logical' -c 'wal_log_hints=on' -c 'hba_file=/etc/postgresql/pg_hba.conf'
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -15,12 +15,6 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./pg_hba.conf:/etc/postgresql/pg_hba.conf:ro
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
 volumes:
   postgres_data:
