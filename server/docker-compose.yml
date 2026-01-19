@@ -4,7 +4,7 @@ services:
   postgres:
     restart: always
     image: postgres:15.13-alpine
-    container_name: laplace_v2_pg
+    container_name: stock_app
     shm_size: 1gb
     command: postgres -c 'max_connections=1000' -c 'wal_level=logical' -c 'wal_log_hints=on'
     environment:
