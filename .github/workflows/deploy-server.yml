@@ -34,6 +34,9 @@ jobs:
             echo "📦 Installing dependencies..."
             npm install --production
 
+            echo "🔐 Ensuring database password is set..."
+            docker exec stock_app psql -U postgres -c "ALTER USER postgres WITH PASSWORD 'postgres';" || true
+
             echo "🔄 Running database migration..."
             npm run migrate
 
