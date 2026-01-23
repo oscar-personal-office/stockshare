@@ -3,7 +3,7 @@ set -e
 
 # 数据库连接配置（从环境变量读取，或使用默认值）
 DB_HOST="${DB_HOST:-localhost}"
-DB_PORT="${DB_PORT:-5432}"
+DB_PORT="${DB_PORT:-54321}"
 DB_USER="${DB_USER:-postgres}"
 DB_PASSWORD="${DB_PASSWORD:-postgres}"
 DB_NAME="${DB_NAME:-stock_app}"
