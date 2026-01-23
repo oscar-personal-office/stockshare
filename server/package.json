@@ -9,6 +9,7 @@
     "start:node": "node dist/index.js",
     "build": "swc src -d dist --strip-leading-paths",
     "build:tsc": "tsc",
+    "db:check": "bash scripts/check-db.sh",
     "migrate": "bash scripts/migrate.sh",
     "db:init": "psql -U postgres -d stock_app -f src/db/init.sql",
     "docker:up": "docker compose up -d",
