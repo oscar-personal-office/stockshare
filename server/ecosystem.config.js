@@ -8,7 +8,7 @@ module.exports = {
       NODE_ENV: 'production',
       PORT: '33333',
       DB_HOST: 'localhost',
-      DB_PORT: '5432',
+      DB_PORT: '54321',
       DB_USER: 'postgres',
       DB_PASSWORD: 'postgres',
       DB_NAME: 'stock_app',
