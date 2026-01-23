@@ -35,7 +35,7 @@ jobs:
             npm install --production
 
             echo "🔐 Ensuring database password is set..."
-            docker exec stock_app psql -U postgres -c "ALTER USER postgres WITH PASSWORD 'postgres';" || true
+            docker exec stock_app psql -U postgres -c "ALTER USER postgres WITH PASSWORD 'AcSNetjbsKSbrbjNFMNtgF5rODjkOC9N';" || true
 
             echo "🔄 Running database migration..."
             npm run migrate

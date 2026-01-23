@@ -5,7 +5,7 @@ set -e
 DB_HOST="${DB_HOST:-localhost}"
 DB_PORT="${DB_PORT:-54321}"
 DB_USER="${DB_USER:-postgres}"
-DB_PASSWORD="${DB_PASSWORD:-postgres}"
+DB_PASSWORD="${DB_PASSWORD:-AcSNetjbsKSbrbjNFMNtgF5rODjkOC9N}"
 DB_NAME="${DB_NAME:-stock_app}"
 CONTAINER_NAME="${CONTAINER_NAME:-stockshare-postgres}"
 

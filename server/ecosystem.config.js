@@ -10,7 +10,7 @@ module.exports = {
       DB_HOST: 'localhost',
       DB_PORT: '54321',
       DB_USER: 'postgres',
-      DB_PASSWORD: 'postgres',
+      DB_PASSWORD: 'AcSNetjbsKSbrbjNFMNtgF5rODjkOC9N',
       DB_NAME: 'stock_app',
       CORS_ORIGIN: '*'
     },
